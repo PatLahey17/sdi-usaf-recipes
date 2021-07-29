@@ -85,7 +85,7 @@ Once you change the src/App.js to reflect the assertions you make in the accepta
 
 To make the test pass the App component should look like:
 
-function App() {
+[x]function App() {
   return (
     <div className="App">
       <h1 className="App-header">My Recipes</h1>
