@@ -1,4 +1,5 @@
 import React from 'react';
+import RecipeCard from './RecipeCard'
 
 class App extends React.Component {
   state = {
@@ -98,6 +99,7 @@ class App extends React.Component {
                       return (<div key={each} className="card">
                         <h3 className="card-title text-center">{recipe.name}</h3>
                         <p className="card-text">{recipe.instructions}</p>
+                        <RecipeCard recipeTitle={recipe.name} recipeInstructions={recipe.instructions}/>
                       </div>
                       )
                     })                   

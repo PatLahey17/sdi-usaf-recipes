@@ -95,12 +95,14 @@ describe("Home page", () => {
       // expect(cy.get('p').contains(/^$/i).to.not('have.value', ''))
       // expect(cy.get('h3').contains(/^$/i)).toExist();
       //expect(cy.get('p').contains(/^$/i)).toExist();
-      
+
       expect(cy.get('h3').contains(/^$/i).should('not.exist'));
       expect(cy.get('p').contains(/^$/i).should('not.exist'));
       
     })
   
   })
+
+  
 })
 
