@@ -49,26 +49,27 @@ class App extends React.Component {
       <form id="recipe-form" className="" onSubmit={this.submitRecipe}>
         <div className="mb-3">
         <label htmlFor="newRecipeName" className="form-label">Recipe name: </label>
-        <input type="text" className="form-control" name="newRecipeName" id="newRecipeName" onChange={this.handleRecipeNameChange} placeholder="write recipe name here..." value={this.state.newRecipeName}/>
+        <input type="text" className="form-control" name="newRecipeName" id="newRecipeName" onChange={this.handleRecipeNameChange} placeholder="write recipe name here..." value={this.state.newRecipeName} required/>
         </div>
         <div className="mb-3">
         <label htmlFor="newRecipeInstructions" className="form-label">Instructions:</label>
         <textarea className="form-control" onChange={this.handleRecipeInstructionsChange}  name="newRecipeInstructions"
           id="newRecipeInstructions" value={this.state.newRecipeInstructions}
-          placeholder="write recipe instructions here..." />
+          placeholder="write recipe instructions here..." required />
            </div>
            <div className="mb-3">
-            <input type="submit" className="btn btn-primary"/>
+           <div className="d-grid gap-2">
+            <input type="submit" className="btn btn-primary btn-block"/>
+          </div>
            </div>
       </form>
   
     )
 
-
     return (
       <div className="App container" >
-        <main className="row">
-          <section className ="col">
+        <main className="row justify-content-center">
+          <section className ="col-md-6 col-sm-12">
             <header className="row">
               <div className="col text-center">
                <h1 className="App-header">My Recipes</h1>
@@ -79,24 +80,28 @@ class App extends React.Component {
                 {
                   this.state.isAddRecipeFormDisplayed
                   ? addNewRecipeForm
-                  : <button type="button" className="btn btn-info mb-3" id="add-recipe" onClick={this.toggleAddRecipeForm}>Add Recipe</button>
+                  : <div className="d-grid gap-2"><button type="button" className="btn btn-info btn-block mb-3 " id="add-recipe" onClick={this.toggleAddRecipeForm}>Add Recipe</button></div>
                 }
               </div>
             </section>
             <section className ="row">
               <div className="col"> 
-                <header>
+              <hr></hr>
+                <header className="text-center">
                   <h2>
                     Current Recipe List
                   </h2>
                 </header>           
                 {
                 this.state.recipes.length > 0 ?
-                <ul>
-                  { this.state.recipes.map((recipeName, each) => {
-                    return <li key={each}>{recipeName.name +'  '+ recipeName.instructions}</li>
-                  }) }
-                </ul> :
+                  this.state.recipes.map((recipe, each) => {
+                      return (<div key={each} className="card">
+                        <h3 className="card-title text-center">{recipe.name}</h3>
+                        <p className="card-text">{recipe.instructions}</p>
+                      </div>
+                      )
+                    })                   
+                 :
                 <p>There are no recipes to list.</p>
               }
               </div>

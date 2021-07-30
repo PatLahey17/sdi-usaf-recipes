@@ -35,8 +35,8 @@ describe("Home page", () => {
     return cy.findByRole('button').click()
       .then(() => {
       //expect(cy.findByRole('listitem', /tofu scramble tacos/i)).toExist();      
-        expect(cy.get('li').contains(/Tofu Scramble Tacos/i)).toExist();
-        expect(cy.get('li').contains("1. heat a skillet on medium with a dollop of coconut oil 2. warm flour tortillas")).toExist();
+        expect(cy.get('h3').contains(/Tofu Scramble Tacos/i)).toExist();
+        expect(cy.get('p').contains("1. heat a skillet on medium with a dollop of coconut oil 2. warm flour tortillas")).toExist();
       })
   })
 
@@ -71,19 +71,36 @@ describe("Home page", () => {
     return cy.findByRole('button').click()
     .then(() => {
     //expect(cy.findByRole('listitem', /tofu scramble tacos/i)).toExist();      
-      expect(cy.get('li').contains(/Tofu Scramble Tacos/i)).toExist();
-      expect(cy.get('li').contains("1. heat a skillet on medium with a dollop of coconut oil 2. warm flour tortillas")).toExist();
-      expect(cy.get('li').contains(/Grilled Beets/i)).toExist();
-      expect(cy.get('li').contains("1. Boil beets until soft. 2. Grill beets.")).toExist();
+      expect(cy.get('h3').contains(/Tofu Scramble Tacos/i)).toExist();
+      expect(cy.get('p').contains("1. heat a skillet on medium with a dollop of coconut oil 2. warm flour tortillas")).toExist();
+      expect(cy.get('h3').contains(/Grilled Beets/i)).toExist();
+      expect(cy.get('p').contains("1. Boil beets until soft. 2. Grill beets.")).toExist();
     })
   
-    // return cy.findByRole('button').click()
-    //   .then(() => {
-    //   expect(cy.findByRole('listitem', /tofu scramble tacos/i)).toExist();
-    //   })
-    //   .then(() => {
-    //     expect(cy.findByRole('listitem', /grilled beets/i)).toExist();
-    //     })
+  })
+
+
+  it("does not submit an empty recipe name-instruction card upon submit", () => {
+    //execute
+    const recipeName = 'TofuScrambleTacos';
+    cy.findByRole('button').click()
+    cy.findByRole('textbox', {name: /Recipe name/i}).type(recipeName)
+    cy.findByRole('textbox', {name: /instructions/i}).type("1. heat a skillet on medium with a dollop of coconut oil {enter} 2. warm flour tortillas")
+
+    cy.findByRole('button').click()
+    //assert
+    return cy.findByRole('button').click()
+    .then(() => {
+      // expect(cy.get('h3').contains(/^$/i)).should('not.have.value', ''))
+      // expect(cy.get('p').contains(/^$/i).to.not('have.value', ''))
+      // expect(cy.get('h3').contains(/^$/i)).toExist();
+      //expect(cy.get('p').contains(/^$/i)).toExist();
+      
+      expect(cy.get('h3').contains(/^$/i).should('not.exist'));
+      expect(cy.get('p').contains(/^$/i).should('not.exist'));
+      
+    })
+  
   })
 })
 
